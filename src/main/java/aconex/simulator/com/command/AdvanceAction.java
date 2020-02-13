@@ -40,27 +40,19 @@ public class AdvanceAction implements BulldozerAction {
 	private boolean validateMove(Bulldozer bulldozer, int fieldSizeX, int fieldSizeY) {
 		switch(bulldozer.getOrientation()) {
 		case LEFT:
-			if(bulldozer.getPositionX()-moves < 0 ) {
-				return false;
-			}
-			break;
+			return check(bulldozer.getPositionX()-moves, bulldozer.getPositionY(), fieldSizeX, fieldSizeY);
 		case UP:
-			if(bulldozer.getPositionY()-moves < 0 ) {
-				return false;
-			}
-			break;
+			return check(bulldozer.getPositionX(), bulldozer.getPositionY()-moves, fieldSizeX, fieldSizeY);
 		case RIGHT:
-			if(bulldozer.getPositionX()+moves > fieldSizeX ) {
-				return false;
-			}
-			break;
+			return check(bulldozer.getPositionX()+moves, bulldozer.getPositionY(), fieldSizeX, fieldSizeY);
 		case DOWN:
-			if(bulldozer.getPositionY()+moves > fieldSizeY ) {
-				return false;
-			}
-			break;
+			return check(bulldozer.getPositionX(), bulldozer.getPositionY()+moves, fieldSizeX, fieldSizeY);
 		}
-		return true;
+		return false;
+	}
+	
+	private boolean check(int x, int y, int fieldSizeX, int fieldSizeY) {
+		return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
 	}
 	
 	/**

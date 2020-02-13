@@ -52,6 +52,30 @@ public class ActionTest {
 	}
 	
 	@Test
+	public void advanceTestOutsideInitialLeft() throws FieldCreateException {
+		bulldozer = new Bulldozer(-1, 0, Orientation.DOWN);
+		BulldozerAction action = new AdvanceAction(4);
+		Report.initializeReport(20);
+		String fileName = "field.txt"; 
+		FieldProvider field = new FileFieldProvider(fileName, new LandFactory());
+		Field res = field.createField();
+		boolean result = action.execute(bulldozer, res);
+		assertFalse(result);
+	}
+	
+	@Test
+	public void advanceTestOutsideInitialRight() throws FieldCreateException {
+		bulldozer = new Bulldozer(10, 0, Orientation.DOWN);
+		BulldozerAction action = new AdvanceAction(4);
+		Report.initializeReport(20);
+		String fileName = "field.txt"; 
+		FieldProvider field = new FileFieldProvider(fileName, new LandFactory());
+		Field res = field.createField();
+		boolean result = action.execute(bulldozer, res);
+		assertFalse(result);
+	}
+	
+	@Test
 	public void advanceTestToPlain() throws FieldCreateException {
 		bulldozer = new Bulldozer(-1, 0, Orientation.RIGHT);
 		BulldozerAction action = new AdvanceAction(1);
